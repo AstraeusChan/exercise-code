@@ -61,6 +61,11 @@ proj <- ArchRProject(
 )
 # 查看有哪些可用矩阵
 getAvailableMatrices(proj)
+# 查看具体矩阵信息(很是稀疏)
+mx <- getMatrixFromProject(ArchRProj = proj, useMatrix = "TileMatrix",binarize = TRUE)
+mx@assays@data@listData$TileMatrix
+# 或者这样也能查看
+dim(assays(getMatrixFromProject(ArchRProj = proj, useMatrix = "TileMatrix", binarize = T))$TileMatrix)
 # 过滤双细胞
 proj <- filterDoublets(ArchRProj = proj)
 # 降维聚类
@@ -129,4 +134,4 @@ ArchRBrowser(ArchRProj = proj)
 # 保存ArchRProject对象到本地
 proj <- saveArchRProject(ArchRProj = proj)
 # 后续重新读入ArchRProject对象
-proj <- loadArchRProject(path = "./HemeTutorial")
+proj <- loadArchRProject(path = "./Human_Brain/")
